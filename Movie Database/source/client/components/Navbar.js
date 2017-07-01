@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-import NavbarActions import '../actions/NavbarActions'
-import NavbarStore from '../stores/NavbarStores'
+import NavbarActions from '../actions/NavbarActions'
+import NavbarStore from '../stores/NavbarStore'
 
 import NavbarUserMenu from './sub-components/NavbarUserMenu'
 

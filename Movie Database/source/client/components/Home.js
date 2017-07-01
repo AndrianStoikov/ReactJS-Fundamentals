@@ -1,26 +1,30 @@
 import React from 'react'
 
+import HomeStore from '../stores/HomeStore'
+import HomeActions from '../actions/HomeAction'
+
 import MovieCard from './sub-components/MovieCard'
 
 export default class Home extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      topTenMovies: [],
-      error: ''
-    }
+    this.state = HomeStore.getState()
+    this.onChange = this.onChange.bind(this)
+  }
+
+  onChange (state) {
+    this.setState(state)
   }
 
   componentDidMount () {
-    let reques = {
-      url: '/api/movies/top-ten',
-      method: 'get'
-    }
+    HomeStore.listen(this.onChange)
 
-    $.ajax(reques)
-      .done(data => this.setState({topTenMovies: data}))
-      .fail(error => this.setState({error: error.responseJson.message}))
+    HomeActions.getTopTenMovies()
+  }
+
+  componentWillUnmount () {
+    HomeStore.unlisten(this.onChange)
   }
 
   render () {
@@ -34,11 +38,11 @@ export default class Home extends React.Component {
     })
 
     return (
-      <div className='container'>
-        <h3 className='text-center'>
+      <div className='container' >
+        <h3 className='text-center' >
           Welcome to <strong>Movie Database</strong>
         </h3>
-        <div className='list-group'>
+        <div className='list-group' >
           {movies}
         </div>
       </div>

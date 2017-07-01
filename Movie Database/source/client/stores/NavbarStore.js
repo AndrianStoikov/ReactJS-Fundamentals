@@ -1,14 +1,14 @@
-improt alt from '../alt'
-import NavbarActions from '../stores/NavbarActions'
+import alt from '../alt'
+import NavbarActions from '../actions/NavbarActions'
 
 class NavbarStore {
-  constructor() {
+  constructor () {
     this.bindActions(NavbarActions)
 
     this.ajaxAnimationClass = ''
   }
 
-  onUpdateAjaxAnimation(animationClass) {
+  onUpdateAjaxAnimation (animationClass) {
     this.ajaxAnimatioClass = animationClass
   }
 }

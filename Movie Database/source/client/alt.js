@@ -1,3 +1,4 @@
-import Alt from 'alt'
+
+let Alt = require('alt')
 
 export default new Alt()

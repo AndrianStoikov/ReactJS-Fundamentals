@@ -4,18 +4,19 @@
 import alt from '../alt'
 
 class FooterActions {
-  constructor() {
+  constructor () {
     this.generateActions(
       'getFiveRecentMoviesSuccess'
     )
   }
 
-  getFiveRecentMovies() {
+  getFiveRecentMovies () {
     let request = {
-      method:"get",
-      url '/api/movies/five-recent'
+      method: 'get',
+      url: '/api/movies/five-recent'
     }
-    $.ajax(reques)
+
+    $.ajax(request)
       .done(data => this.getFiveRecentMoviesSuccess)
 
     return true

@@ -2,13 +2,13 @@ import alt from '../alt'
 import FooterActions from '../actions/FooterActions'
 
 class FooterStore {
-  constructor() {
+  constructor () {
     this.bindActions(FooterActions)
 
     this.mostRecentMovies = []
   }
 
-  onGetFiveRecentMoviesSuccess(data) {
+  onGetFiveRecentMoviesSuccess (data) {
     this.mostRecentMovies = data
   }
 }

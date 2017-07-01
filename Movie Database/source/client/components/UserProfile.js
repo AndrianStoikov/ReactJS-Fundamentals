@@ -1,5 +1,7 @@
 import React from 'react'
 
+import UserStore from '../stores/UserStore'
+
 export default class UserProfile extends React.Component {
   constructor (props) {
     super(props)
@@ -14,27 +16,16 @@ export default class UserProfile extends React.Component {
     }
   }
 
-  componentDidMount () {
-    let request = {
-      url: `/api/user/${this.props.params.userId}`,
-      method: 'get'
-    }
+  onChange (state) {
+    this.setState(state)
+  }
 
-    $.ajax(request)
-      .done(user => {
-        this.setState({
-          username: user.username,
-          roles: user.roles,
-          information: user.information,
-          votes: user.votes,
-          reviews: user.reviews
-        })
-      })
-      .fail(err => {
-        this.setState({
-          message: err.responseJSON.message
-        })
-      })
+  componentDidMount () {
+    UserStore.listen(this.onChange)
+  }
+
+  componentWillUnmount () {
+    UserStore.unlisten(this.onChange)
   }
 
   render () {
@@ -58,16 +49,16 @@ export default class UserProfile extends React.Component {
             <p>{this.state.information}</p>
           </div>
         </div>
-        <div className='container profile-container'>
-          <div className='profile-stats clearfix'>
+        <div className='container profile-container' >
+          <div className='profile-stats clearfix' >
             <ul>
               <li>
-                <span className='stats-number'>{this.state.votes}</span> Votes
+                <span className='stats-number' >{this.state.votes}</span> Votes
               </li>
             </ul>
           </div>
-          <div className='pull-right btn-group'>
-            <a className='btn btn-primary' onClick=''>
+          <div className='pull-right btn-group' >
+            <a className='btn btn-primary' onClick='' >
               {this.state.showRatedMovies ? 'Hide' : 'Rated Movies'}
             </a>
           </div>

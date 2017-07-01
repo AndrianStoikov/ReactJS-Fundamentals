@@ -12,10 +12,20 @@ export default class MovieCard extends React.Component {
   }
 
   render () {
+    let posterNode
+    if (this.props.movie.moviePosterUrl) {
+      posterNode = (
+        <img className='media-object' src={this.props.movie.moviePosterUrl} />
+      )
+    }
+
     return (
       <div className='animated fadeIn' >
         <div className='media movie' >
           <span className='position pull-left' >{this.props.index + 1}</span>
+          <div className='pull-left thumb-lg' >
+            {posterNode}
+          </div>
           <div className='media-body' >
             <h4 className='media-heading' >
               <Link to={`/movie/${this.props.movie._id}/${this.props.movie.name}`} >
@@ -23,18 +33,18 @@ export default class MovieCard extends React.Component {
               </Link>
             </h4>
             <small>Genres: {this.props.movie.genres}</small>
-            <br/>
+            <br />
             <p>{this.props.movie.description}</p>
-            <span className="votes"> Votes:
-              {/*<strong> {this.state.movieVotes}</strong>*/}
+            <span className='votes' > Votes:
+              {/* <strong> {this.state.movieVotes}</strong> */}
             </span>
-            {/*{nodes.rating}*/}
+            {/* {nodes.rating} */}
           </div>
-          {/*{nodes.panelToggles}*/}
+          {/* {nodes.panelToggles} */}
         </div>
-        {/*{nodes.votePanel}*/}
-        {/*{nodes.commentsPanel}*/}
-        <div id="clear"/>
+        {/* {nodes.votePanel} */}
+        {/* {nodes.commentsPanel} */}
+        <div id='clear' />
       </div>
     )
   }
