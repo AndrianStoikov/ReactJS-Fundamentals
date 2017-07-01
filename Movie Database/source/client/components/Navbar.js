@@ -1,30 +1,36 @@
 import React from 'react'
 import { Link } from 'react-router'
 
+import NavbarActions import '../actions/NavbarActions'
+import NavbarStore from '../stores/NavbarStores'
+
 import NavbarUserMenu from './sub-components/NavbarUserMenu'
 
 export default class Navbar extends React.Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      ajaxAnimationClass: ''
-    }
+    this.state = NavbarStore.getState()
+
+    this.onChange = this.onChange.bind(this)
+  }
+
+  onChange(state) {
+    this.setState(state)
   }
 
   componentDidMount () {
-    $(document).ajaxStart(() => {
-      this.setState({
-        ajaxAnimationClass: 'fadeIn'
-      })
-    })
+    NavbarStore.listen(this.onChange)
 
-    $(document).ajaxStop(() => {
-      this.setState({
-        ajaxAnimationClass: 'fadeOut'
-      })
-    })
+    $(document).ajaxStart(() => NavbarActions.updateAjaxAnimation('fadeIn'))
+
+    $(document).ajaxStop(() => NavbarActions.updateAjaxAnimation('fadeOut'))
   }
+
+  componentWillUnmount() {
+    NavbarStore.unlisten(this.onChange)
+  }
+
 
   render () {
     let navbarUserMenu = <NavbarUserMenu userData={this.props.userData} />

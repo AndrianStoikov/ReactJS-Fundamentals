@@ -1,35 +1,33 @@
 import React from 'react'
 import { Link } from 'react-router'
 
+import FooterStore from '../stores/FooterStore'
+import FooterActions from '../actions/FooterActions'
+
 export default class Footer extends React.Component {
 
   constructor (props) {
     super(props)
 
-    this.state = {
-      mostRecentMovies: []
-    }
+    this.state = FooterStore.getState()
 
-    this.getFiveRecentMovies = this.getFiveRecentMovies.bind(this)
+    this.onChange = this.onChange.bind(this)
+  }
+
+  onChange (state) {
+    this.setState(state)
   }
 
   componentDidMount () {
-    this.getFiveRecentMovies()
+    FooterStore.listen(this.onChange)
+
+    FooterActions.getFiveRecentMovies()
+    this.interval = setInterval(() => FooterActions.getFiveRecentMovies(), 30000)
   }
 
-  getFiveRecentMovies () {
-    let request = {
-      method: 'get',
-      url: '/api/movies/five-recent'
-    }
-
-    $.ajax(request)
-      .done(data => {
-        this.setState({
-          mostRecentMovies: data
-        })
-      })
-      .fail(err => console.log(err))
+  componentWillUnmount() {
+    FooterActions.unlisten(this.onChange)
+    clearInterval(this.interval)
   }
 
   render () {
@@ -59,7 +57,7 @@ export default class Footer extends React.Component {
             </div>
             <div className='col-sm-4 hidden-xs' >
               <h3 className='lead' >
-                <storng>Newest </storng>
+                <storng>Newest</storng>
                 5 movies
               </h3>
               <ul className='list-inline' >
