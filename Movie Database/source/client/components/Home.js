@@ -1,7 +1,7 @@
 import React from 'react'
 
-import HomeStore from '../stores/HomeStore'
-import HomeActions from '../actions/HomeAction'
+import HomeStore from '../stores/MovieStore'
+import HomeActions from '../actions/MovieActions'
 
 import MovieCard from './sub-components/MovieCard'
 

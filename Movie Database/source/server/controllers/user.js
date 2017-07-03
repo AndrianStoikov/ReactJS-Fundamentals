@@ -24,13 +24,13 @@ module.exports = {
               return res.status(200).send({message: 'Wrong credentials!'})
             }
 
-            res.status(200)
+            res.status(200).end()
           })
         })
         .catch(error => {
           res.status(500).send({message: error})
         })
-    },
+    }
   },
   login: {
     post: (req, res) => {

@@ -1,6 +1,5 @@
 import React from 'react'
 import UserStore from '../stores/UserStore'
-import UserActions from '../actions/UserActions'
 
 import Navbar from './Navbar'
 import Footer from './Footer'
@@ -20,7 +19,6 @@ export default class App extends React.Component {
 
   componentDidMount () {
     UserStore.listen(this.onChange)
-    UserActions.loginUser()
   }
 
   componentWillUnmount () {

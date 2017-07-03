@@ -7312,6 +7312,13 @@ img.mfp-img {
 /*
  * Bootstrap overrides.
  */
+.help-block {
+  display: none;
+}
+.has-error .help-block,
+.has-success .help-block {
+  display: inherit;
+}
 html {
   position: relative;
   min-height: 100%;

@@ -6,24 +6,17 @@ import MoviePanelsToggle from '../components/sub-components/MoviePanelsToggle'
 import MoviePoster from '../components/sub-components/MoviePoster'
 
 export default class Helpers {
-  static appendToArray (value, array) {
-    array.push(value)
-    return array
-  }
-
-  static prependToArray (value, array) {
-    array.push(value)
-    return array
-  }
-
-  static removeFromArray (value, array) {
-    let index = array.indexOf(value)
-
-    if (index !== -1) {
-      array.splice(index, 1)
+  static formatMovieRating (score, votes) {
+    let rating = score / votes
+    if (isNaN(rating)) {
+      rating = 0
     }
 
-    return array
+    if (rating % 1 !== 0) {
+      rating = rating.toFixed(1)
+    }
+
+    return rating
   }
 
   static nodesMovieCard (state, props, toggleCommentsPanel, toggleVotePanel) {

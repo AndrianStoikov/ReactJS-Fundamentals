@@ -8,12 +8,14 @@ class UserStore {
     this.loggedInUserId = ''
     this.username = ''
     this.roles = []
+    this.userIsLoggedIn = false
   }
 
   onLoginUserSuccess (user) {
     this.loggedInUserId = user._id
     this.username = user.username
     this.roles = user.roles
+    this.userIsLoggedIn = true
   }
 
   onLoginUserFail () {
@@ -22,6 +24,7 @@ class UserStore {
 
   onLogoutUserSuccess () {
     this.loggedInUserId = ''
+    this.userIsLoggedIn = false
   }
 }
 

@@ -45,7 +45,8 @@ export default class MovieCard extends React.Component {
             movieId={this.props.movie._id} />
         </div>
         {this.state.showVotePanel ? <MovieVotePanel movieId={this.props.movie._id} /> : null}
-        {this.state.showCommentsPanel ? <MovieCommentsPanel movieId={this.props.movie._id} /> : null}
+        {this.state.showCommentsPanel ?
+          <MovieCommentsPanel comments={this.props.movie.comments} movieId={this.props.movie._id} /> : null}
         <div id='clear' />
       </div>
     )
