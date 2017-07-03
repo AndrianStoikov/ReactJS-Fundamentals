@@ -18,6 +18,7 @@ class FooterActions {
 
     $.ajax(request)
       .done(data => this.getFiveRecentMoviesSuccess)
+      .fail(err => console.log(err))
 
     return true
   }

@@ -3,7 +3,6 @@ import React from 'react'
 import MovieAddActions from '../actions/MovieAddActions'
 import MovieAddStore from '../stores/MovieAddStores'
 
-
 export default class AddMovie extends React.Component {
   constructor (props) {
     super(props)
@@ -13,15 +12,15 @@ export default class AddMovie extends React.Component {
     this.onChange = this.onChange.bind(this)
   }
 
-  onChange(state) {
+  onChange (state) {
     this.setState(state)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     MovieAddStore.listen(this.onChange)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     MovieAddStore.unlisten(this.onChange)
   }
 
@@ -106,14 +105,14 @@ export default class AddMovie extends React.Component {
                       <input
                         type='checkbox' name='genres' id='romance' value='Romance'
                         checked={this.state.genres.indexOf('Romance') !== -1}
-                        onChange={this.handleGenresChange.bind(this)} />
+                        onChange={MovieAddActions.handleGenresChange} />
                       <label htmlFor='romance' >Romance</label>
                     </div>
                     <div className='checkbox checkbox-inline' >
                       <input
                         type='checkbox' name='genres' id='thriller' value='Thriller'
                         checked={this.state.genres.indexOf('Thriller') !== -1}
-                        onChange={this.handleGenresChange.bind(this)} />
+                        onChange={MovieAddActions.handleGenresChange} />
                       <label htmlFor='thriller' >Thriller</label>
                     </div>
                     <div className='checkbox checkbox-inline' >

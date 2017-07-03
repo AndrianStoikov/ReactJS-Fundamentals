@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
+
+import UserActions from '../../actions/UserActions'
 import UserStore from '../../stores/UserStore'
 
 export default class NavbarUserMenu extends React.Component {
@@ -23,21 +25,14 @@ export default class NavbarUserMenu extends React.Component {
     UserStore.unlisten(this.onChange)
   }
 
-  componentWillReceiveProps (nextProps) {
-    this.setState({
-      loggedInUserId: nextProps.userData.loggedInUserId
-    })
-  }
-
   render () {
-    let userData = this.props.userData
     let userMenu
 
     if (!this.state.loggedInUserId) {
       userMenu = (
         <ul className='nav navbar-nav pull-right' >
           <li>
-            <a href='#' onClick={userData.loginUser} >Login</a>
+            <a href='#' onClick={UserActions.loginUser} >Login</a>
           </li>
           <li>
             <Link to='/user/register' >Register</Link>
@@ -51,7 +46,7 @@ export default class NavbarUserMenu extends React.Component {
             <Link to={`/user/profile/${this.state.loggedInUserId}`} >Profile</Link>
           </li>
           <li>
-            <a href='#' onClick={userData.logoutUser} >Logout</a>
+            <a href='#' onClick={UserActions.logoutUser} >Logout</a>
           </li>
         </ul>
       )

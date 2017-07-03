@@ -15,7 +15,7 @@ export default class Navbar extends React.Component {
     this.onChange = this.onChange.bind(this)
   }
 
-  onChange(state) {
+  onChange (state) {
     this.setState(state)
   }
 
@@ -27,13 +27,12 @@ export default class Navbar extends React.Component {
     $(document).ajaxStop(() => NavbarActions.updateAjaxAnimation('fadeOut'))
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     NavbarStore.unlisten(this.onChange)
   }
 
-
   render () {
-    let navbarUserMenu = <NavbarUserMenu userData={this.props.userData} />
+    let navbarUserMenu = <NavbarUserMenu />
     return (
       <nav className='navbar navbar-default navbar-static-top' >
         <div className='navbar-header' >

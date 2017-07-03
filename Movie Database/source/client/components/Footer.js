@@ -57,8 +57,7 @@ export default class Footer extends React.Component {
             </div>
             <div className='col-sm-4 hidden-xs' >
               <h3 className='lead' >
-                <storng>Newest</storng>
-                5 movies
+                <strong>Newest 5 movies</strong>
               </h3>
               <ul className='list-inline' >
                 {mostRecentMovies}

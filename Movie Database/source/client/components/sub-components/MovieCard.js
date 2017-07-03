@@ -1,49 +1,51 @@
 import React from 'react'
-import { Link } from 'react-router'
+
+import MoviePoster from './MoviePoster'
+import MovieInfo from './MovieInfo'
+import MoviePanelsToggle from './MoviePanelsToggle'
+import MovieVotePanel from './MovieVotePanel'
+import MovieCommentsPanel from './MovieCommentsPanel'
 
 export default class MovieCard extends React.Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      movieScore: this.props.movie.score,
-      movieVotes: this.props.movie.votes
+      showVotePanel: false,
+      showCommentsPanel: false
     }
   }
 
-  render () {
-    let posterNode
-    if (this.props.movie.moviePosterUrl) {
-      posterNode = (
-        <img className='media-object' src={this.props.movie.moviePosterUrl} />
-      )
-    }
+  toggleCommentsPanel () {
+    this.setState(prevState => ({
+      showCommentsPanel: !prevState.showCommentsPanel,
+      showVotePanel: false
+    }))
+  }
 
+  toggleVotePanel () {
+    this.setState(prevState => ({
+      showVotePanel: !prevState.showVotePanel,
+      showCommentsPanel: false
+    }))
+  }
+
+  render () {
     return (
       <div className='animated fadeIn' >
         <div className='media movie' >
-          <span className='position pull-left' >{this.props.index + 1}</span>
-          <div className='pull-left thumb-lg' >
-            {posterNode}
-          </div>
-          <div className='media-body' >
-            <h4 className='media-heading' >
-              <Link to={`/movie/${this.props.movie._id}/${this.props.movie.name}`} >
-                {this.props.movie.name}
-              </Link>
-            </h4>
-            <small>Genres: {this.props.movie.genres}</small>
-            <br />
-            <p>{this.props.movie.description}</p>
-            <span className='votes' > Votes:
-              {/* <strong> {this.state.movieVotes}</strong> */}
-            </span>
-            {/* {nodes.rating} */}
-          </div>
-          {/* {nodes.panelToggles} */}
+          <span className='position pull-left' >{ this.props.index + 1 }</span>
+          <MoviePoster posterUrl={this.props.movie.moviePosterUrl} />
+          <MovieInfo movie={this.props.movie} />
+          <MoviePanelsToggle
+            toggleCommentsPanel={this.toggleCommentsPanel.bind(this)}
+            toggleVotePanel={this.toggleVotePanel.bind(this)}
+            showCommentsPanel={this.state.showCommentsPanel}
+            showVotePanel={this.state.showVotePanel}
+            movieId={this.props.movie._id} />
         </div>
-        {/* {nodes.votePanel} */}
-        {/* {nodes.commentsPanel} */}
+        {this.state.showVotePanel ? <MovieVotePanel movieId={this.props.movie._id} /> : null}
+        {this.state.showCommentsPanel ? <MovieCommentsPanel movieId={this.props.movie._id} /> : null}
         <div id='clear' />
       </div>
     )

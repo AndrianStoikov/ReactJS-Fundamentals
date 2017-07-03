@@ -5,7 +5,7 @@ class HomeStore {
   constructor () {
     this.bindActions(HomeActions)
 
-    this.toptenMovies = []
+    this.topTenMovies = []
   }
 
   onGetTopTenMoviesSuccess (movies) {

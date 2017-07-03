@@ -13,7 +13,7 @@ class MovieAddActions {
     )
   }
 
-  addMovie(data) {
+  addMovie (data) {
     let request = {
       url: '/api/movies/add',
       method: 'POST',

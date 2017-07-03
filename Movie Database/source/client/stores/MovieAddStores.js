@@ -1,3 +1,5 @@
+import alt from '../alt'
+
 import MovieAddActions from '../actions/MovieAddActions'
 import Helpers from '../utilities/Helpers'
 
@@ -57,3 +59,5 @@ class MovieAddStores {
   }
 
 }
+
+export default alt.createStore(MovieAddStores)
